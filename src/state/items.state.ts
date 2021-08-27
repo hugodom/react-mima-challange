@@ -7,6 +7,7 @@ export interface GlobalState {
   cartItems: CartItemModel[];
   totalCart: number;
   cartOpen: boolean;
+  mobileView: boolean;
   firstLoadGroceries: (loadedGroceries: Grocery[]) => void;
   removeFromStore: (id: string) => void;
   removeFromStock: (id: string) => void;
@@ -16,6 +17,7 @@ export interface GlobalState {
   addToTotal: (value: number) => void;
   removeFromTotal: (value: number) => void;
   toggleCart: () => void;
+  setMobileView: (value: boolean) => void;
 }
 
 const useStore = create<GlobalState>(
@@ -28,13 +30,15 @@ const useStore = create<GlobalState>(
 
     cartOpen: false,
 
+    mobileView: window.innerWidth < 600,
+
     // loadGroceries: (loadedGroceries: Grocery[]) =>
     //   set((state: GlobalState) => ({
     //     groceries: state.groceries.concat(loadedGroceries),
     //   })),
 
     firstLoadGroceries: (loadedGroceries: Grocery[]) =>
-      set((state: GlobalState) => ({
+      set(() => ({
         groceries: loadedGroceries,
       })),
 
@@ -125,6 +129,11 @@ const useStore = create<GlobalState>(
     toggleCart: () =>
       set((state: GlobalState) => ({
         cartOpen: !state.cartOpen,
+      })),
+
+    setMobileView: (value: boolean) =>
+      set(() => ({
+        mobileView: value,
       })),
   }))
 );

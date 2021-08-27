@@ -1,6 +1,6 @@
 import { Button, CardActionArea, CardContent } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
-import { CartItemModel, Grocery } from "../../shared/models/grocery";
+import { CartItemModel } from "../../shared/models/grocery";
 import useStore, { GlobalState } from "../../state/items.state";
 import {
   CardMediaStyled,

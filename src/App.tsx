@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Grid } from "@material-ui/core";
 import { Cart } from "./components/Cart/Cart";
 import { MobileHeader } from "./components/MobileHeader/MobileHeader";
 import { ProductList } from "./components/ProductList/ProductList";
-import { Grocery } from "./shared/models/grocery";
 import useStore, { GlobalState } from "./state/items.state";
 
 // Create a client
 const queryClient = new QueryClient();
 
 function App() {
-  const { cartOpen }: GlobalState = useStore();
-  const [mobileView, setMobileView] = useState(window.innerWidth < 600);
+  const { cartOpen, setMobileView, mobileView }: GlobalState = useStore();
 
   useEffect(() => {
     function resizeScreen() {

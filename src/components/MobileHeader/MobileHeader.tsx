@@ -6,7 +6,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import useStore, { GlobalState } from "../../state/items.state";
 
 export const MobileHeader = () => {
-  const { toggleCart }: GlobalState = useStore();
+  const { toggleCart, cartOpen }: GlobalState = useStore();
   return (
     <Toolbar>
       <IconButton
@@ -22,7 +22,7 @@ export const MobileHeader = () => {
       >
         <ArrowBackIosIcon />
       </IconButton>
-      Mimacom
+      {cartOpen ? "Cart" : "Product List"}
     </Toolbar>
   );
 };
