@@ -6,6 +6,7 @@ export interface GlobalState {
   groceries: Grocery[];
   cartItems: CartItemModel[];
   totalCart: number;
+  cartOpen: boolean;
   firstLoadGroceries: (loadedGroceries: Grocery[]) => void;
   removeFromStore: (id: string) => void;
   removeFromStock: (id: string) => void;
@@ -14,6 +15,7 @@ export interface GlobalState {
   addToStock: (id: string) => void;
   addToTotal: (value: number) => void;
   removeFromTotal: (value: number) => void;
+  toggleCart: () => void;
 }
 
 const useStore = create<GlobalState>(
@@ -23,6 +25,8 @@ const useStore = create<GlobalState>(
     cartItems: [],
 
     totalCart: 0,
+
+    cartOpen: false,
 
     // loadGroceries: (loadedGroceries: Grocery[]) =>
     //   set((state: GlobalState) => ({
@@ -116,6 +120,11 @@ const useStore = create<GlobalState>(
     removeFromTotal: (value: number) =>
       set((state: GlobalState) => ({
         totalCart: state.totalCart - value,
+      })),
+
+    toggleCart: () =>
+      set((state: GlobalState) => ({
+        cartOpen: !state.cartOpen,
       })),
   }))
 );

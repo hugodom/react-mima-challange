@@ -41,7 +41,6 @@ export const ProductList: FunctionComponent<{}> = () => {
             container
             direction="row"
             justifyContent="flex-start"
-            alignItems="baseline"
             spacing={2}
             data-testid="ProductList"
           >
