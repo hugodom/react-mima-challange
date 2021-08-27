@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { ProductItem } from "./ProductItem";
+import { Cart } from "./Cart";
 
 test("Correctly renders Component", () => {
-  render(<ProductItem />);
-  expect(screen.getByTestId("ProductItem")).toBeTruthy();
+  render(<Cart />);
+  expect(screen.getByTestId("Cart")).toBeTruthy();
 });
