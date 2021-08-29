@@ -20,6 +20,7 @@ export const Cart = () => {
         direction="column"
         alignItems="stretch"
         justifyContent="space-between"
+        data-testid="Cart"
       >
         <GridCart container direction="column" alignItems="stretch">
           {cartItems?.map((item: CartItemModel) => (

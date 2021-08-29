@@ -29,6 +29,7 @@ export const ProductItem: FunctionComponent<ProductItemProps> = ({
 }) => (
   <Card data-testid="ProductItem">
     <CardActionArea
+      data-testid="card-action-area"
       onClick={() => {
         handleClick(grocery);
       }}
@@ -38,12 +39,14 @@ export const ProductItem: FunctionComponent<ProductItemProps> = ({
     <CardContent>
       {grocery.favorite ? (
         <FavoriteStyled
+          aria-label="Favorited"
           onClick={() => {
             toggleItemFavorite(grocery);
           }}
         />
       ) : (
         <FavoriteBorderStyled
+          aria-label="Not favorited"
           onClick={() => {
             toggleItemFavorite(grocery);
           }}
@@ -71,6 +74,8 @@ export const ProductItem: FunctionComponent<ProductItemProps> = ({
         >
           <BodyText variant="body1">Stock: {grocery.stock}</BodyText>
           <Button
+            aria-label="Add button"
+            data-testid="add-button"
             color="primary"
             variant="contained"
             onClick={() => {

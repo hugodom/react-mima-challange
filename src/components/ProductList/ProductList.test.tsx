@@ -5,7 +5,7 @@ import { ProductList } from "./ProductList";
 
 const queryClient = new QueryClient();
 
-test.skip("Correctly renders Component", async () => {
+test("Correctly renders Component", async () => {
   render(
     <QueryClientProvider client={queryClient} contextSharing={true}>
       <ProductList />
