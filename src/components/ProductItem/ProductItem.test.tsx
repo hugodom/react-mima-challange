@@ -4,18 +4,6 @@ import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-test-renderer";
 import { ProductItem } from "./ProductItem";
 
-let container: Element | DocumentFragment | null = null;
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
 const grocery = {
   id: "7ac6d979-0771-4b8c-809d-eb8aa36be7f4",
   image_url:
@@ -43,58 +31,41 @@ const favoritedGrocery = {
 const handleFunction = jest.fn();
 const toggleItem = jest.fn();
 
-it("Correctly renders Component", () => {
-  act(() => {
-    render(
-      <ProductItem
-        grocery={grocery}
-        handleClick={handleFunction}
-        toggleItemFavorite={toggleItem}
-      />
-    );
-  });
+test("Correctly renders Component", async () => {
+  render(
+    <ProductItem
+      grocery={grocery}
+      handleClick={handleFunction}
+      toggleItemFavorite={toggleItem}
+    />
+  );
+
   expect(screen.getByTestId("ProductItem")).toBeTruthy();
   expect(screen.getByLabelText("Not favorited")).toBeTruthy();
   expect(screen.queryByLabelText("Favorited")).not.toBeInTheDocument();
 });
 
-it("Correctly renders a favorite Component", () => {
-  act(() => {
-    render(
-      <ProductItem
-        grocery={favoritedGrocery}
-        handleClick={handleFunction}
-        toggleItemFavorite={toggleItem}
-      />
-    );
-    expect(screen.getByTestId("ProductItem")).toBeTruthy();
-    expect(screen.queryByLabelText("Not favorited")).not.toBeInTheDocument();
-    expect(screen.queryByLabelText("Favorited")).toBeTruthy();
-  });
-});
+test("Correctly renders a favorite Component", () => {
+  render(
+    <ProductItem
+      grocery={favoritedGrocery}
+      handleClick={handleFunction}
+      toggleItemFavorite={toggleItem}
+    />
+  );
+  expect(screen.getByTestId("ProductItem")).toBeTruthy();
+  expect(screen.queryByLabelText("Not favorited")).not.toBeInTheDocument();
+  expect(screen.queryByLabelText("Favorited")).toBeTruthy();
 
-it("Calls functions when clicked", () => {
-  act(() => {
-    render(
-      <ProductItem
-        grocery={favoritedGrocery}
-        handleClick={handleFunction}
-        toggleItemFavorite={toggleItem}
-      />
-    );
-    expect(handleFunction).toHaveBeenCalledTimes(0);
-    expect(toggleItem).toHaveBeenCalledTimes(0);
+  expect(handleFunction).toHaveBeenCalledTimes(0);
+  expect(toggleItem).toHaveBeenCalledTimes(0);
 
-    fireEvent.click(screen.queryByLabelText("Favorited"));
-    expect(toggleItem).toHaveBeenCalledTimes(1);
+  fireEvent.click(screen.queryByLabelText("Favorited"));
+  expect(toggleItem).toHaveBeenCalledTimes(1);
 
-    // Test that the button does not exist
-    expect(screen.queryByLabelText("Add button")).not.toBeTruthy();
+  // Test that the button does not exist
+  expect(screen.queryByLabelText("Add button")).not.toBeTruthy();
 
-    fireEvent.click(screen.queryByTestId("card-action-area"));
-    expect(handleFunction).toHaveBeenCalledTimes(1);
-
-    // Finding hidden elements
-    // const hiddenAddButton;
-  });
+  fireEvent.click(screen.queryByTestId("card-action-area"));
+  expect(handleFunction).toHaveBeenCalledTimes(1);
 });
