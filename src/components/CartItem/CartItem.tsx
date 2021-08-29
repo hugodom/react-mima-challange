@@ -1,11 +1,8 @@
-import { Button, CardActionArea, CardContent } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
 import { CartItemModel } from "../../shared/models/grocery";
 import useStore, { GlobalState } from "../../state/items.state";
-import {
-  CardMediaStyled,
-  CardStyled,
-} from "../ProductItem/ProductItems.styles";
+import { CartItemWrapper } from "./CartItem.styles";
 
 export type CartItemProp = {
   item: CartItemModel;
@@ -21,34 +18,55 @@ export const CartItem: FunctionComponent<CartItemProp> = ({ item }) => {
     removeFromTotal,
   }: GlobalState = useStore();
   return (
-    <CardStyled>
-      <CardActionArea>
-        <CardMediaStyled image={item.image_url} />
-      </CardActionArea>
-      <CardContent>
-        <Button
-          onClick={() => {
-            removeFromCart(item.id);
-            removeFromTotal(item.price);
-            addToStock(item.id);
-          }}
-        >
-          -
-        </Button>
-        {item.total}
-        <Button
-          onClick={() => {
-            if (item.stock >= 1) {
-              addToCart(item);
-              addToTotal(item.price);
-              removeFromStock(item.id);
-            }
-          }}
-        >
-          +
-        </Button>
-        <div>Total: {item.price * item.total} €</div>
-      </CardContent>
-    </CardStyled>
+    <CartItemWrapper>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Grid item xs>
+          <img
+            alt="productImage"
+            src={item.image_url}
+            height="108"
+            width="108"
+          />
+        </Grid>
+        <Grid item>
+          <Typography align="center">{item.productName}</Typography>
+          <Grid container alignItems="center">
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => {
+                removeFromCart(item.id);
+                removeFromTotal(item.price);
+                addToStock(item.id);
+              }}
+            >
+              -
+            </Button>
+            {item.total}
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => {
+                if (item.stock >= 1) {
+                  addToCart(item);
+                  addToTotal(item.price);
+                  removeFromStock(item.id);
+                }
+              }}
+            >
+              +
+            </Button>
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          <Typography align="right">{item.price * item.total} €</Typography>
+        </Grid>
+      </Grid>
+    </CartItemWrapper>
   );
 };

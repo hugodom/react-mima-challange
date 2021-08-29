@@ -1,34 +1,44 @@
 import React from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Hidden, Typography } from "@material-ui/core";
 import { CartItemModel } from "../../shared/models/grocery";
 import useStore, { GlobalState } from "../../state/items.state";
 import { CartItem } from "../CartItem/CartItem";
+import { GridCart } from "./Cart.styles";
 
 export const Cart = () => {
-  const { cartItems, totalCart, mobileView }: GlobalState = useStore();
+  const { cartItems, totalCart }: GlobalState = useStore();
 
   return (
     <>
-      {!mobileView && <div>Cart</div>}
+      <Hidden only="xs">
+        <Typography variant="h4" align="center">
+          Cart
+        </Typography>
+      </Hidden>
       <Grid
         container
         direction="column"
         alignItems="stretch"
-        justifyContent="center"
+        justifyContent="space-between"
       >
-        {cartItems?.map((item: CartItemModel) => (
-          <Grid key={item.id}>
-            <CartItem item={item} />
-          </Grid>
-        ))}
-        Total amount: {totalCart}
-        <Button
-          onClick={() => {
-            console.log("clicked");
-          }}
-        >
-          Checkout
-        </Button>
+        <GridCart container direction="column" alignItems="stretch">
+          {cartItems?.map((item: CartItemModel) => (
+            <CartItem key={item.id} item={item} />
+          ))}
+        </GridCart>
+        <Grid container justifyContent="space-evenly" alignItems="center">
+          <Button
+            size="large"
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              //  console.log("clicked");
+            }}
+          >
+            Checkout
+          </Button>
+          <Typography variant="subtitle1">{totalCart} €</Typography>
+        </Grid>
       </Grid>
     </>
   );

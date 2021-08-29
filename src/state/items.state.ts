@@ -7,7 +7,6 @@ export interface GlobalState {
   cartItems: CartItemModel[];
   totalCart: number;
   cartOpen: boolean;
-  mobileView: boolean;
   firstLoadGroceries: (loadedGroceries: Grocery[]) => void;
   removeFromStore: (id: string) => void;
   removeFromStock: (id: string) => void;
@@ -17,7 +16,8 @@ export interface GlobalState {
   addToTotal: (value: number) => void;
   removeFromTotal: (value: number) => void;
   toggleCart: () => void;
-  setMobileView: (value: boolean) => void;
+  toggleFavorite: (id: string) => void;
+  recalculateStockAfterReload: () => void;
 }
 
 const useStore = create<GlobalState>(
@@ -29,8 +29,6 @@ const useStore = create<GlobalState>(
     totalCart: 0,
 
     cartOpen: false,
-
-    mobileView: window.innerWidth < 600,
 
     // loadGroceries: (loadedGroceries: Grocery[]) =>
     //   set((state: GlobalState) => ({
@@ -131,10 +129,31 @@ const useStore = create<GlobalState>(
         cartOpen: !state.cartOpen,
       })),
 
-    setMobileView: (value: boolean) =>
-      set(() => ({
-        mobileView: value,
-      })),
+    toggleFavorite: (id: string) =>
+      set((state: GlobalState) => {
+        const newGroceries = [...state.groceries];
+        const modifiedItem = newGroceries.find((item) => item.id === id);
+        if (modifiedItem) {
+          modifiedItem.favorite = modifiedItem.favorite ? 0 : 1;
+          return {
+            groceries: [...state.groceries],
+          };
+        }
+        return {
+          groceries: [...state.groceries],
+        };
+      }),
+    recalculateStockAfterReload: () =>
+      set((state: GlobalState) => {
+        const groceriesCopy = [...state.groceries];
+
+        const filteredArray = state.cartItems.filter((value) =>
+          groceriesCopy.includes(value)
+        );
+        return {
+          groceries: [...state.cartItems],
+        };
+      }),
   }))
 );
 
