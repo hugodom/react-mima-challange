@@ -8,8 +8,9 @@ import useStore, { GlobalState } from "../../state/items.state";
 export const MobileHeader = () => {
   const { toggleCart, cartOpen }: GlobalState = useStore();
   return (
-    <Toolbar>
+    <Toolbar data-testid="toolbar">
       <IconButton
+        data-testid="change-menu"
         {...{
           edge: "start",
           color: "inherit",
@@ -20,7 +21,7 @@ export const MobileHeader = () => {
           toggleCart();
         }}
       >
-        <ArrowBackIosIcon />
+        <ArrowBackIosIcon data-testid="arrow-header" />
       </IconButton>
       <Typography variant="h2" align="center">
         {cartOpen ? "Cart" : "Product List"}

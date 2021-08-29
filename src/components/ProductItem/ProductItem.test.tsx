@@ -93,5 +93,8 @@ it("Calls functions when clicked", () => {
 
     fireEvent.click(screen.queryByTestId("card-action-area"));
     expect(handleFunction).toHaveBeenCalledTimes(1);
+
+    // Finding hidden elements
+    // const hiddenAddButton;
   });
 });
