@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
+import actualCreate from "zustand";
 import { Cart } from "./Cart";
 
 test("Correctly renders Component", () => {
