@@ -63,6 +63,23 @@ export const ProductList: FunctionComponent<{}> = () => {
     // loadFavorites.mutate();
   };
 
+  const groceryList = (grocery: Grocery) => (
+    <Grid
+      key={grocery.id}
+      item
+      xs={6}
+      sm={4}
+      md={3}
+      className="productItemContainer"
+    >
+      <ProductItem
+        grocery={grocery}
+        handleClick={handleClick}
+        toggleItemFavorite={toggleItemFavorite}
+      />
+    </Grid>
+  );
+
   return (
     <>
       <Hidden only="xs">
@@ -71,6 +88,7 @@ export const ProductList: FunctionComponent<{}> = () => {
         </Typography>
       </Hidden>
       <Switch
+        aria-label="Favorite toggle"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           if (event.target.checked) setshowOnlyFavorites(true);
           else setshowOnlyFavorites(false);
@@ -94,28 +112,12 @@ export const ProductList: FunctionComponent<{}> = () => {
           }}
         >
           {!showOnlyFavorites &&
-            groceries?.map((grocery: Grocery) => (
-              <Grid key={grocery.id} item xs={6} sm={4} md={3}>
-                <ProductItem
-                  grocery={grocery}
-                  handleClick={handleClick}
-                  toggleItemFavorite={toggleItemFavorite}
-                />
-              </Grid>
-            ))}
+            groceries?.map((grocery: Grocery) => groceryList(grocery))}
 
           {showOnlyFavorites &&
             groceries?.map((grocery: Grocery) => (
               <React.Fragment key={grocery.id}>
-                {grocery.favorite === 1 && (
-                  <Grid item xs={6} sm={4} md={3}>
-                    <ProductItem
-                      grocery={grocery}
-                      handleClick={handleClick}
-                      toggleItemFavorite={toggleItemFavorite}
-                    />
-                  </Grid>
-                )}
+                {grocery.favorite === 1 && groceryList(grocery)}
               </React.Fragment>
             ))}
         </Grid>
