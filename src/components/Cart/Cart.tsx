@@ -1,9 +1,9 @@
-import React from "react";
-import { Button, Grid, Hidden, Typography } from "@material-ui/core";
-import { CartItemModel } from "../../shared/models/grocery";
-import useStore, { GlobalState } from "../../state/items.state";
-import { CartItem } from "../CartItem/CartItem";
-import { GridCart } from "./Cart.styles";
+import React from 'react';
+import { Button, Grid, Hidden, Typography } from '@material-ui/core';
+import { CartItemModel } from '../../shared/models/grocery';
+import useStore, { GlobalState } from '../../state/items.state';
+import { CartItem } from '../CartItem/CartItem';
+import { GridCart } from './Cart.styles';
 
 export const Cart = () => {
   const { cartItems, totalCart }: GlobalState = useStore();
