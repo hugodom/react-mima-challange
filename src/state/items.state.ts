@@ -17,7 +17,6 @@ export interface GlobalState {
   removeFromTotal: (value: number) => void;
   toggleCart: () => void;
   toggleFavorite: (id: string) => void;
-  recalculateStockAfterReload: () => void;
 }
 
 const useStore = create<GlobalState>(
@@ -141,17 +140,6 @@ const useStore = create<GlobalState>(
         }
         return {
           groceries: [...state.groceries],
-        };
-      }),
-    recalculateStockAfterReload: () =>
-      set((state: GlobalState) => {
-        const groceriesCopy = [...state.groceries];
-
-        const filteredArray = state.cartItems.filter((value) =>
-          groceriesCopy.includes(value)
-        );
-        return {
-          groceries: [...state.cartItems],
         };
       }),
   }))

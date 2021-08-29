@@ -13,10 +13,7 @@ import {
   Switch,
 } from "@material-ui/core";
 import { CartItemModel, Grocery } from "../../shared/models/grocery";
-import {
-  fetchFavoriteGroceries,
-  fetchGroceries,
-} from "../../shared/queries/fetchGroceries";
+import { fetchGroceries } from "../../shared/queries/fetchGroceries";
 import { ProductItem } from "../ProductItem/ProductItem";
 import useStore, { GlobalState } from "../../state/items.state";
 
@@ -34,7 +31,7 @@ export const ProductList: FunctionComponent<{}> = () => {
 
   useEffect(() => {}, [showOnlyFavorites]);
 
-  const { status, refetch } = useQuery<Grocery[]>("groceries", fetchGroceries, {
+  const { status } = useQuery<Grocery[]>("groceries", fetchGroceries, {
     onSuccess: (loadedData) => {
       firstLoadGroceries(loadedData);
     },
@@ -51,12 +48,6 @@ export const ProductList: FunctionComponent<{}> = () => {
       },
     })
   );
-
-  const loadFavorites = useMutation(fetchFavoriteGroceries, {
-    onSuccess: (loadedData) => {
-      firstLoadGroceries(loadedData);
-    },
-  });
 
   const handleClick = (item: Grocery) => {
     if (item.stock >= 1) {
