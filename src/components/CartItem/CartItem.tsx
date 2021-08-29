@@ -18,7 +18,7 @@ export const CartItem: FunctionComponent<CartItemProp> = ({ item }) => {
     removeFromTotal,
   }: GlobalState = useStore();
   return (
-    <CartItemWrapper>
+    <CartItemWrapper className="cartItem">
       <Grid
         container
         direction="row"
@@ -39,6 +39,7 @@ export const CartItem: FunctionComponent<CartItemProp> = ({ item }) => {
             <Button
               size="small"
               color="secondary"
+              data-testid="remove-from-cart"
               onClick={() => {
                 removeFromCart(item.id);
                 removeFromTotal(item.price);
@@ -47,10 +48,11 @@ export const CartItem: FunctionComponent<CartItemProp> = ({ item }) => {
             >
               -
             </Button>
-            {item.total}
+            <div data-testid="total-items">{item.total}</div>
             <Button
               size="small"
               color="secondary"
+              data-testid="add-from-cart"
               onClick={() => {
                 if (item.stock >= 1) {
                   addToCart(item);
