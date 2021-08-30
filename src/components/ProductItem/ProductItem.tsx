@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent } from 'react';
 import {
   Button,
   CardActionArea,
@@ -6,15 +6,15 @@ import {
   Typography,
   Grid,
   Hidden,
-  Card,
-} from "@material-ui/core";
-import { Grocery } from "../../shared/models/grocery";
+  Card
+} from '@material-ui/core';
+import { Grocery } from '../../shared/models/grocery';
 import {
   BodyText,
   CardMediaStyled,
   FavoriteBorderStyled,
-  FavoriteStyled,
-} from "./ProductItems.styles";
+  FavoriteStyled
+} from './ProductItems.styles';
 
 type ProductItemProps = {
   grocery: Grocery;
@@ -25,7 +25,7 @@ type ProductItemProps = {
 export const ProductItem: FunctionComponent<ProductItemProps> = ({
   grocery,
   handleClick,
-  toggleItemFavorite,
+  toggleItemFavorite
 }) => (
   <Card data-testid="ProductItem">
     <CardActionArea

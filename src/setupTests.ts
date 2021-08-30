@@ -2,11 +2,11 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom';
 
-import { setupServer } from "msw/node";
-import { setLogger } from "react-query";
-import { handlers } from "./tests/utils";
+import { setupServer } from 'msw/node';
+import { setLogger } from 'react-query';
+import { handlers } from './tests/utils';
 
 export const server = setupServer(...handlers);
 
@@ -22,5 +22,5 @@ afterAll(() => server.close());
 setLogger({
   log: console.log,
   warn: console.warn,
-  error: () => {},
+  error: () => {}
 });

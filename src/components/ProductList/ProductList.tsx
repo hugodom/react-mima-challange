@@ -2,20 +2,20 @@ import React, {
   ChangeEvent,
   FunctionComponent,
   useEffect,
-  useState,
-} from "react";
-import { useMutation, useQuery } from "react-query";
+  useState
+} from 'react';
+import { useMutation, useQuery } from 'react-query';
 import {
   CircularProgress,
   Grid,
   Typography,
   Hidden,
-  Switch,
-} from "@material-ui/core";
-import { CartItemModel, Grocery } from "../../shared/models/grocery";
-import { fetchGroceries } from "../../shared/queries/fetchGroceries";
-import { ProductItem } from "../ProductItem/ProductItem";
-import useStore, { GlobalState } from "../../state/items.state";
+  Switch
+} from '@material-ui/core';
+import { CartItemModel, Grocery } from '../../shared/models/grocery';
+import { fetchGroceries } from '../../shared/queries/fetchGroceries';
+import { ProductItem } from '../ProductItem/ProductItem';
+import useStore, { GlobalState } from '../../state/items.state';
 
 export const ProductList: FunctionComponent<{}> = () => {
   const {
@@ -24,29 +24,29 @@ export const ProductList: FunctionComponent<{}> = () => {
     removeFromStock,
     addToCart,
     addToTotal,
-    toggleFavorite,
+    toggleFavorite
   }: GlobalState = useStore();
 
   const [showOnlyFavorites, setshowOnlyFavorites] = useState(false);
 
   useEffect(() => {}, [showOnlyFavorites]);
 
-  const { status } = useQuery<Grocery[]>("groceries", fetchGroceries, {
+  const { status } = useQuery<Grocery[]>('groceries', fetchGroceries, {
     refetchOnWindowFocus: false,
     onSuccess: (loadedData) => {
       firstLoadGroceries(loadedData);
-    },
+    }
   });
 
   const favoriteMutation = useMutation((item: Grocery) =>
     fetch(`http://localhost:3000/grocery/${item.id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify({
-        favorite: item.favorite,
+        favorite: item.favorite
       }),
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+        'Content-type': 'application/json; charset=UTF-8'
+      }
     })
   );
 
@@ -95,12 +95,12 @@ export const ProductList: FunctionComponent<{}> = () => {
           else setshowOnlyFavorites(false);
         }}
         name="checkedA"
-        inputProps={{ "aria-label": "secondary checkbox" }}
+        inputProps={{ 'aria-label': 'secondary checkbox' }}
       />
       Show only favorites
-      {status === "loading" && <CircularProgress />}
-      {status === "error" && <div>Error fetching data</div>}
-      {status === "success" && (
+      {status === 'loading' && <CircularProgress />}
+      {status === 'error' && <div>Error fetching data</div>}
+      {status === 'success' && (
         <Grid
           container
           direction="row"
@@ -109,7 +109,7 @@ export const ProductList: FunctionComponent<{}> = () => {
           data-testid="ProductList"
           style={{
             margin: 0,
-            width: "100%",
+            width: '100%'
           }}
         >
           {!showOnlyFavorites &&

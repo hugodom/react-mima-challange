@@ -1,8 +1,8 @@
-import { Button, Grid, Typography } from "@material-ui/core";
-import React, { FunctionComponent } from "react";
-import { CartItemModel } from "../../shared/models/grocery";
-import useStore, { GlobalState } from "../../state/items.state";
-import { CartItemWrapper } from "./CartItem.styles";
+import { Button, Grid, Typography } from '@material-ui/core';
+import React, { FunctionComponent } from 'react';
+import { CartItemModel } from '../../shared/models/grocery';
+import useStore, { GlobalState } from '../../state/items.state';
+import { CartItemWrapper } from './CartItem.styles';
 
 export type CartItemProp = {
   item: CartItemModel;
@@ -15,7 +15,7 @@ export const CartItem: FunctionComponent<CartItemProp> = ({ item }) => {
     addToStock,
     removeFromStock,
     addToTotal,
-    removeFromTotal,
+    removeFromTotal
   }: GlobalState = useStore();
   return (
     <CartItemWrapper className="cartItem">

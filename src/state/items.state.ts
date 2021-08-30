@@ -1,6 +1,6 @@
-import create from "zustand";
-import { devtools } from "zustand/middleware";
-import { Grocery, CartItemModel } from "../shared/models/grocery";
+import create from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { Grocery, CartItemModel } from '../shared/models/grocery';
 
 export interface GlobalState {
   groceries: Grocery[];
@@ -36,14 +36,14 @@ const useStore = create<GlobalState>(
 
     firstLoadGroceries: (loadedGroceries: Grocery[]) =>
       set(() => ({
-        groceries: loadedGroceries,
+        groceries: loadedGroceries
       })),
 
     removeFromStore: (id: string) =>
       set((state: GlobalState) => ({
         groceries: state.groceries.filter(
           (grocery: Grocery) => grocery.id !== id
-        ),
+        )
       })),
 
     addToCart: (item: CartItemModel) =>
@@ -55,13 +55,13 @@ const useStore = create<GlobalState>(
         if (foundItem) {
           foundItem.total += 1;
           return {
-            cartItems: [...state.cartItems],
+            cartItems: [...state.cartItems]
           };
         }
         const itemCopy = item;
         itemCopy.total = 1;
         return {
-          cartItems: [...state.cartItems, itemCopy],
+          cartItems: [...state.cartItems, itemCopy]
         };
       }),
 
@@ -74,13 +74,13 @@ const useStore = create<GlobalState>(
         if (foundItem && foundItem.total >= 2) {
           foundItem.total -= 1;
           return {
-            cartItems: [...state.cartItems],
+            cartItems: [...state.cartItems]
           };
         }
         return {
           cartItems: state.cartItems.filter(
             (cartItem: CartItemModel) => cartItem.id !== id
-          ),
+          )
         };
       }),
 
@@ -91,11 +91,11 @@ const useStore = create<GlobalState>(
         if (modifiedItem) {
           modifiedItem.stock -= 1;
           return {
-            groceries: [...state.groceries],
+            groceries: [...state.groceries]
           };
         }
         return {
-          groceries: [...state.groceries],
+          groceries: [...state.groceries]
         };
       }),
 
@@ -106,26 +106,26 @@ const useStore = create<GlobalState>(
         if (modifiedItem) {
           modifiedItem.stock += 1;
           return {
-            groceries: [...state.groceries],
+            groceries: [...state.groceries]
           };
         }
         return {
-          groceries: [...state.groceries],
+          groceries: [...state.groceries]
         };
       }),
 
     addToTotal: (value: number) =>
       set((state: GlobalState) => ({
-        totalCart: state.totalCart + value,
+        totalCart: state.totalCart + value
       })),
     removeFromTotal: (value: number) =>
       set((state: GlobalState) => ({
-        totalCart: state.totalCart - value,
+        totalCart: state.totalCart - value
       })),
 
     toggleCart: () =>
       set((state: GlobalState) => ({
-        cartOpen: !state.cartOpen,
+        cartOpen: !state.cartOpen
       })),
 
     toggleFavorite: (id: string) =>
@@ -135,13 +135,13 @@ const useStore = create<GlobalState>(
         if (modifiedItem) {
           modifiedItem.favorite = modifiedItem.favorite ? 0 : 1;
           return {
-            groceries: [...state.groceries],
+            groceries: [...state.groceries]
           };
         }
         return {
-          groceries: [...state.groceries],
+          groceries: [...state.groceries]
         };
-      }),
+      })
   }))
 );
 

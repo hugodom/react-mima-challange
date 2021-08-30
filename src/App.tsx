@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Grid, Hidden } from "@material-ui/core";
-import { Cart } from "./components/Cart/Cart";
-import { MobileHeader } from "./components/MobileHeader/MobileHeader";
-import { ProductList } from "./components/ProductList/ProductList";
-import useStore, { GlobalState } from "./state/items.state";
-import { ThemeConfig } from "./theme/ThemeConfig";
-import { StyledMainGrid } from "./App.styles";
+import React from 'react';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { Grid, Hidden } from '@material-ui/core';
+import { Cart } from './components/Cart/Cart';
+import { MobileHeader } from './components/MobileHeader/MobileHeader';
+import { ProductList } from './components/ProductList/ProductList';
+import useStore, { GlobalState } from './state/items.state';
+import { ThemeConfig } from './theme/ThemeConfig';
+import { StyledMainGrid } from './App.styles';
 
 // Create a client
 const queryClient = new QueryClient();

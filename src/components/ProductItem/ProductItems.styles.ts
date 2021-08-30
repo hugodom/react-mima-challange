@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { CardMedia, Typography } from "@material-ui/core";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import styled from 'styled-components';
+import { CardMedia, Typography } from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 interface TextProps {
   truncated?: {
@@ -29,6 +29,6 @@ export const BodyText = styled(Typography)<TextProps>`
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: ${(props) =>
-    props.truncated?.value ? props.truncated?.amount : "none"};
+    props.truncated?.value ? props.truncated?.amount : 'none'};
   -webkit-box-orient: vertical;
 `;
