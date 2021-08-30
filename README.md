@@ -2,9 +2,24 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Tools
+
+- **Code**: Typescript, React
+- **Style**: styled-components, material UI
+- **Lint**: ESLint, Prettier
+- **Testing**: Cypress, Jest and RTL
+- **Zustand**: For state management - https://github.com/pmndrs/zustand
+- **React Query**: V3 - https://react-query.tanstack.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+## Cypress
+
+### `yarn run cypress open`
+
+In order for Cypress to work, project must be running in port 3001.
 
 ### `yarn start`
 
