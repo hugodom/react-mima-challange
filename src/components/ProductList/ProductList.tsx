@@ -32,6 +32,7 @@ export const ProductList: FunctionComponent<{}> = () => {
   useEffect(() => {}, [showOnlyFavorites]);
 
   const { status } = useQuery<Grocery[]>("groceries", fetchGroceries, {
+    refetchOnWindowFocus: false,
     onSuccess: (loadedData) => {
       firstLoadGroceries(loadedData);
     },
