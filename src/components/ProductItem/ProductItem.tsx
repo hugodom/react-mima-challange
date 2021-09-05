@@ -37,7 +37,7 @@ export const ProductItem: FunctionComponent<ProductItemProps> = ({
       <CardMediaStyled image={grocery.image_url} />
     </CardActionArea>
     <CardContent>
-      {grocery.favorite ? (
+      {grocery.favorite === '1' ? (
         <FavoriteStyled
           aria-label="Favorited"
           onClick={() => {

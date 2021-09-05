@@ -1,9 +1,4 @@
-import React, {
-  ChangeEvent,
-  FunctionComponent,
-  useEffect,
-  useState
-} from 'react';
+import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import {
   CircularProgress,
@@ -28,8 +23,6 @@ export const ProductList: FunctionComponent<{}> = () => {
   }: GlobalState = useStore();
 
   const [showOnlyFavorites, setshowOnlyFavorites] = useState(false);
-
-  useEffect(() => {}, [showOnlyFavorites]);
 
   const { status } = useQuery<Grocery[]>('groceries', fetchGroceries, {
     refetchOnWindowFocus: false,
@@ -118,7 +111,7 @@ export const ProductList: FunctionComponent<{}> = () => {
           {showOnlyFavorites &&
             groceries?.map((grocery: Grocery) => (
               <React.Fragment key={grocery.id}>
-                {grocery.favorite === 1 && groceryList(grocery)}
+                {grocery.favorite === '1' && groceryList(grocery)}
               </React.Fragment>
             ))}
         </Grid>

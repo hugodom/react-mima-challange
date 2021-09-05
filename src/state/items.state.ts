@@ -133,7 +133,7 @@ const useStore = create<GlobalState>(
         const newGroceries = [...state.groceries];
         const modifiedItem = newGroceries.find((item) => item.id === id);
         if (modifiedItem) {
-          modifiedItem.favorite = modifiedItem.favorite ? 0 : 1;
+          modifiedItem.favorite = modifiedItem.favorite === '1' ? '0' : '1';
           return {
             groceries: [...state.groceries]
           };
